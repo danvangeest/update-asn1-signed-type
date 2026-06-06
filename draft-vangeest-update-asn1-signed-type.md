@@ -12,18 +12,18 @@ number:
 date:
 consensus: true
 v: 3
-area: Security
-workgroup: Limited Additional Mechanisms for PKIX and SMIME
+# area: Security
+# workgroup: Limited Additional Mechanisms for PKIX and SMIME
 keyword:
  - Public Key Infrastructure
  - ASN.1 SIGNED type
 venue:
-  group: Limited Additional Mechanisms for PKIX and SMIME
-  type: Working Group
-  mail: spasm@ietf.org
-  arch: https://mailarchive.ietf.org/arch/browse/spasm/
-  github: danvangeest/update-asn1-signed-type
-  latest: https://example.com/LATEST
+#  group: Limited Additional Mechanisms for PKIX and SMIME
+#  type: Working Group
+#  mail: spasm@ietf.org
+#  arch: https://mailarchive.ietf.org/arch/browse/spasm/
+  github: "danvangeest/update-asn1-signed-type"
+  latest: "https://danvangeest.github.io/update-asn1-signed-type/draft-vangeest-update-asn1-signed-type.html"
 
 author:
  -
