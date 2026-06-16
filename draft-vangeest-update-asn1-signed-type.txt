@@ -2,14 +2,14 @@
 
 
 
-Limited Additional Mechanisms for PKIX and SMIME             D. V. Geest
+Network Working Group                                       D. Van Geest
 Internet-Draft                                       CryptoNext Security
-Updates: [5912, 5958] (if approved)                          6 June 2026
+Updates: [5912, 5958] (if approved)                         16 June 2026
 Intended status: Informational                                          
-Expires: 8 December 2026
+Expires: 18 December 2026
 
 
-                           TODO - Your title
+        Updated Parameterized SIGNED ASN.1 Type for X.509 (PKIX)
              draft-vangeest-update-asn1-signed-type-latest
 
 Abstract
@@ -25,15 +25,10 @@ About This Document
    This note is to be removed before publishing as an RFC.
 
    The latest revision of this draft can be found at
-   https://example.com/LATEST.  Status information for this document may
-   be found at https://datatracker.ietf.org/doc/draft-vangeest-update-
-   asn1-signed-type/.
-
-   Discussion of this document takes place on the Limited Additional
-   Mechanisms for PKIX and SMIME Working Group mailing list
-   (mailto:spasm@ietf.org), which is archived at
-   https://mailarchive.ietf.org/arch/browse/spasm/.  Subscribe at
-   https://www.ietf.org/mailman/listinfo/spasm/.
+   https://danvangeest.github.io/update-asn1-signed-type/draft-vangeest-
+   update-asn1-signed-type.html.  Status information for this document
+   may be found at https://datatracker.ietf.org/doc/draft-vangeest-
+   update-asn1-signed-type/.
 
    Source for this draft and an issue tracker can be found at
    https://github.com/danvangeest/update-asn1-signed-type.
@@ -53,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 December 2026.
+   This Internet-Draft will expire on 18 December 2026.
 
 Copyright Notice
 
@@ -72,36 +67,81 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-   2.  Conventions and Definitions
-   3.  ASN.1 Module for RFC5280, Explicit
-   4.  ASN.1 Module for RFC5958
-   5.  Security Considerations
-   6.  IANA Considerations
-   7.  References
-     7.1.  Normative References
-     7.2.  Informative References
+   2.  ASN.1 Module for RFC 5280, Explicit
+   3.  ASN.1 Module for RFC 5958
+   4.  Security Considerations
+   5.  IANA Considerations
+   6.  References
+     6.1.  Normative References
+     6.2.  Informative References
    Acknowledgments
    Author's Address
 
 1.  Introduction
 
-   TODO Introduction
+   The PKIX-CommonTypes-2009 ASN.1 module of RFC 5912 defines the
+   SIGNATURE-ALGORITHM ASN.1 information object class [RFC5912].  The
+   PKIX1Explicit-2009 ASN.1 module of RFC 5912 defines the
+   SIGNED{ToBeSigned} ASN.1 type [RFC5912].  SIGNATURE-ALGORITHM has an
+   optional field, &Value, containing the type definition for the value
+   structure of the signature.  If this field is absent, comments in the
+   PKIX1Explicit-2009 module state that no ASN.1 encoding is performed
+   on the value.  In RFC 5912, the SIGNED{ToBeSigned} type has a non-
+   optional field, signature, with a CONTAINING clause referring to
+   SIGNATURE-ALGORITHM.&Value.  It is not valid ASN.1 for a CONTAINING
+   clause to refer to a type which is absent.  An ASN.1 syntax checker
+   and compiler may accept this situation (since the type may also be
+   present), but when an encoded ASN.1 information object with an absent
+   &Value field is decoded, the decoder will return an error.  This was
+   not the intention of the PKIX1Explicit-2009 module, the intention was
+   that the unencoded signature contents would be used.
 
-2.  Conventions and Definitions
+   At time of writing, there are many signature algorithms defining
+   instantiations of the SIGNATURE-ALGORITHM class which don't include
+   the &Value field, namely RSASSA-PSS RFC5912 [RFC8692], RSA PKCS v1.5
+   RFC5912 [RFC9688], Ed25519 [RFC8410], HSS-LMS RFC8708 [RFC9708], XMSS
+   [RFC9802], SLH-DSA RFC9814 [RFC9909], ML-DSA [RFC9881], and sa-
+   unsigned [RFC9925].  On the other hand, there are fewer signature
+   algorithms instantiating the SIGNATURE-ALGORITHM class which include
+   the &Value field, namely DSA [RFC5912], ECDSA RFC5912 [RFC8692]
+   [RFC9688], and sa-noSignature [RFC6402].  The ASN.1 module defined in
+   Section 2 will allow ASN.1 decoders to process signature algorithms
+   from the former set, as well as future SIGNATURE-ALGORITHM
+   instantiations without the &Value field defined.  Signature
+   algorithms with the &Value field defined can also use this module,
+   but will not have compiler-assisted constraints applied.
 
-   TODO Can we remove this because there is no normative terminology?
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-   "OPTIONAL" in this document are to be interpreted as described in
-   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
-   capitals, as shown here.
+   This document updates the following RFCs to define ASN.1 modules
+   without ASN.1 CONSTRAINED clauses that refer to optional information
+   object class fields:
 
-3.  ASN.1 Module for [RFC5280], Explicit
+   *  RFC 5912, New ASN.1 Modules for the Public Key Infrastructure
+      Using X.509 (PKIX) [RFC5912].  Section 14 of [RFC5912], "ASN.1
+      Module for RFC 5280, Explicit and Implicit" [RFC5280] is updated.
+      Only the explicit module is updated.
+
+   *  RFC 5958, Asymmetric Key Packages [RFC5958].  A commented-out
+      alternative representation of OneAsymmetricKey is removed.
+
+2.  ASN.1 Module for RFC 5280, Explicit
 
    SIGNED{ToBeSigned} is updated to a simpler version without ASN.1
    constraints.  The SIGNATURE-ALGORITHM.&Value field is optional, and
-   it was not valid for the SIGNED{ToBeSigned} signature CONTAINING
-   constraint to reference a non-existent field.
+   it was not valid for the previous version of the SIGNED{ToBeSigned}
+   signature CONTAINING constraint to reference a non-existent field.
+   This is the only change compared to the PKIX1Explicit-2009 module in
+   [RFC5912].
+
+   The new SIGNED{ToBeSigned} definition is:
+
+   SIGNED{ToBeSigned} ::= SEQUENCE {
+       toBeSigned          ToBeSigned,
+       algorithmIdentifier AlgorithmIdentifier{SIGNATURE-ALGORITHM,
+                           {SignatureAlgorithms}},
+       signature           BIT STRING
+   }
+
+   The full ASN.1 module is:
 
    <CODE BEGINS>
    PKIX1Explicit-2026
@@ -502,7 +542,7 @@ Table of Contents
    END
    <CODE ENDS>
 
-4.  ASN.1 Module for [RFC5958]
+3.  ASN.1 Module for RFC 5958
 
    The only change for this module from the AsymmetricKeyPackageModuleV1
    module in [RFC5958] is to remove the commented-out alternative
@@ -624,18 +664,18 @@ Table of Contents
    END
    <CODE ENDS>
 
-5.  Security Considerations
+4.  Security Considerations
 
    Even though all the RFCs in this document are security-related, the
    document itself does not have any security considerations.  The ASN.1
    modules keep the same bits-on-the-wire as the modules that they
    replace.
 
-6.  IANA Considerations
+5.  IANA Considerations
 
    IANA is requested to allocate a value from the "SMI Security for PKIX
    Module Identifier (1.3.6.1.5.5.7.0)" registry for the ASN.1 module in
-   Section 3.
+   Section 2.
 
    *  Decimal: IANA Assigned - _Replace TBD1_
 
@@ -643,21 +683,16 @@ Table of Contents
 
    IANA is requested to allocate a value from the "SMI Security for S/
    MIME Module Identifier (1.2.840.113549.1.9.16.0)" registry for the
-   ASN.1 module in Section 4.
+   ASN.1 module in Section 3.
 
    *  Decimal: IANA Assigned - _Replace TBD2_
 
    *  Description: AsymmetricKeyPackageModuleV1-2026 - id-mod-
       asymmetricKeyPkgV1-2026
 
-7.  References
+6.  References
 
-7.1.  Normative References
-
-   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119,
-              DOI 10.17487/RFC2119, March 1997,
-              <https://www.rfc-editor.org/rfc/rfc2119>.
+6.1.  Normative References
 
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
@@ -669,16 +704,73 @@ Table of Contents
               DOI 10.17487/RFC5958, August 2010,
               <https://www.rfc-editor.org/rfc/rfc5958>.
 
-   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
-              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
-              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
-
-7.2.  Informative References
+6.2.  Informative References
 
    [RFC5912]  Hoffman, P. and J. Schaad, "New ASN.1 Modules for the
               Public Key Infrastructure Using X.509 (PKIX)", RFC 5912,
               DOI 10.17487/RFC5912, June 2010,
               <https://www.rfc-editor.org/rfc/rfc5912>.
+
+   [RFC6402]  Schaad, J., "Certificate Management over CMS (CMC)
+              Updates", RFC 6402, DOI 10.17487/RFC6402, November 2011,
+              <https://www.rfc-editor.org/rfc/rfc6402>.
+
+   [RFC8410]  Josefsson, S. and J. Schaad, "Algorithm Identifiers for
+              Ed25519, Ed448, X25519, and X448 for Use in the Internet
+              X.509 Public Key Infrastructure", RFC 8410,
+              DOI 10.17487/RFC8410, August 2018,
+              <https://www.rfc-editor.org/rfc/rfc8410>.
+
+   [RFC8692]  Kampanakis, P. and Q. Dang, "Internet X.509 Public Key
+              Infrastructure: Additional Algorithm Identifiers for
+              RSASSA-PSS and ECDSA Using SHAKEs", RFC 8692,
+              DOI 10.17487/RFC8692, December 2019,
+              <https://www.rfc-editor.org/rfc/rfc8692>.
+
+   [RFC8708]  Housley, R., "Use of the HSS/LMS Hash-Based Signature
+              Algorithm in the Cryptographic Message Syntax (CMS)",
+              RFC 8708, DOI 10.17487/RFC8708, February 2020,
+              <https://www.rfc-editor.org/rfc/rfc8708>.
+
+   [RFC9688]  Housley, R., "Use of the SHA3 One-Way Hash Functions in
+              the Cryptographic Message Syntax (CMS)", RFC 9688,
+              DOI 10.17487/RFC9688, November 2024,
+              <https://www.rfc-editor.org/rfc/rfc9688>.
+
+   [RFC9708]  Housley, R., "Use of the HSS/LMS Hash-Based Signature
+              Algorithm in the Cryptographic Message Syntax (CMS)",
+              RFC 9708, DOI 10.17487/RFC9708, January 2025,
+              <https://www.rfc-editor.org/rfc/rfc9708>.
+
+   [RFC9802]  Van Geest, D., Bashiri, K., Fluhrer, S., Gazdag, S., and
+              S. Kousidis, "Use of the HSS and XMSS Hash-Based Signature
+              Algorithms in Internet X.509 Public Key Infrastructure",
+              RFC 9802, DOI 10.17487/RFC9802, June 2025,
+              <https://www.rfc-editor.org/rfc/rfc9802>.
+
+   [RFC9814]  Housley, R., Fluhrer, S., Kampanakis, P., and B.
+              Westerbaan, "Use of the SLH-DSA Signature Algorithm in the
+              Cryptographic Message Syntax (CMS)", RFC 9814,
+              DOI 10.17487/RFC9814, July 2025,
+              <https://www.rfc-editor.org/rfc/rfc9814>.
+
+   [RFC9881]  Massimo, J., Kampanakis, P., Turner, S., and B. E.
+              Westerbaan, "Internet X.509 Public Key Infrastructure --
+              Algorithm Identifiers for the Module-Lattice-Based Digital
+              Signature Algorithm (ML-DSA)", RFC 9881,
+              DOI 10.17487/RFC9881, October 2025,
+              <https://www.rfc-editor.org/rfc/rfc9881>.
+
+   [RFC9909]  Bashiri, K., Fluhrer, S., Gazdag, S., Van Geest, D., and
+              S. Kousidis, "Internet X.509 Public Key Infrastructure --
+              Algorithm Identifiers for the Stateless Hash-Based Digital
+              Signature Algorithm (SLH-DSA)", RFC 9909,
+              DOI 10.17487/RFC9909, December 2025,
+              <https://www.rfc-editor.org/rfc/rfc9909>.
+
+   [RFC9925]  Benjamin, D., "Unsigned X.509 Certificates", RFC 9925,
+              DOI 10.17487/RFC9925, February 2026,
+              <https://www.rfc-editor.org/rfc/rfc9925>.
 
 Acknowledgments
 
