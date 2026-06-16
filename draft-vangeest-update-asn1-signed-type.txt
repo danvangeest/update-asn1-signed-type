@@ -100,16 +100,17 @@ Table of Contents
    instantiations of the SIGNATURE-ALGORITHM class which don't include
    the &Value field, namely RSASSA-PSS RFC5912 [RFC8692], RSA PKCS v1.5
    RFC5912 [RFC9688], Ed25519 [RFC8410], HSS-LMS RFC8708 [RFC9708], XMSS
-   [RFC9802], SLH-DSA RFC9814 [RFC9909], ML-DSA [RFC9881], and sa-
-   unsigned [RFC9925].  On the other hand, there are fewer signature
-   algorithms instantiating the SIGNATURE-ALGORITHM class which include
-   the &Value field, namely DSA [RFC5912], ECDSA RFC5912 [RFC8692]
-   [RFC9688], and sa-noSignature [RFC6402].  The ASN.1 module defined in
-   Section 2 will allow ASN.1 decoders to process signature algorithms
-   from the former set, as well as future SIGNATURE-ALGORITHM
-   instantiations without the &Value field defined.  Signature
-   algorithms with the &Value field defined can also use this module,
-   but will not have compiler-assisted constraints applied.
+   [RFC9802], SLH-DSA RFC9814 [RFC9909], ML-DSA [RFC9881], sa-unsigned
+   [RFC9925], and Composite ML-DSA [I-D.ietf-lamps-pq-composite-sigs].
+   On the other hand, there are fewer signature algorithms instantiating
+   the SIGNATURE-ALGORITHM class which include the &Value field, namely
+   DSA [RFC5912], ECDSA RFC5912 [RFC8692] [RFC9688], and sa-noSignature
+   [RFC6402].  The ASN.1 module defined in Section 2 will allow ASN.1
+   decoders to process signature algorithms from the former set, as well
+   as future SIGNATURE-ALGORITHM instantiations without the &Value field
+   defined.  Signature algorithms with the &Value field defined can also
+   use this module, but will not have compiler-assisted constraints
+   applied.
 
    This document updates the following RFCs to define ASN.1 modules
    without ASN.1 CONSTRAINED clauses that refer to optional information
@@ -705,6 +706,15 @@ Table of Contents
               <https://www.rfc-editor.org/rfc/rfc5958>.
 
 6.2.  Informative References
+
+   [I-D.ietf-lamps-pq-composite-sigs]
+              Ounsworth, M., Gray, J., Pala, M., Klaußner, J., and S.
+              Fluhrer, "Composite Module-Lattice-Based Digital Signature
+              Algorithm (ML-DSA) for use in X.509 Public Key
+              Infrastructure", Work in Progress, Internet-Draft, draft-
+              ietf-lamps-pq-composite-sigs-19, 21 April 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-lamps-
+              pq-composite-sigs-19>.
 
    [RFC5912]  Hoffman, P. and J. Schaad, "New ASN.1 Modules for the
               Public Key Infrastructure Using X.509 (PKIX)", RFC 5912,
