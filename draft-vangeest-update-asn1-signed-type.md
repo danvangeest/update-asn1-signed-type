@@ -26,17 +26,22 @@ venue:
   latest: "https://danvangeest.github.io/update-asn1-signed-type/draft-vangeest-update-asn1-signed-type.html"
 
 author:
- -
-    ins: D. Van Geest
-    fullname: Daniel Van Geest
-    organization: CryptoNext Security
-    email: daniel.vangeest@cryptonext-security.com
+- ins: D. Van Geest
+  fullname: Daniel Van Geest
+  organization: CryptoNext Security
+  email: daniel.vangeest@cryptonext-security.com
+
+- ins: C. Wallace
+  fullname: Carl Wallace
+  organization: Red Hound Software, Inc.
+  email: carl@redhoundsoftware.com
 
 normative:
   RFC5280:
   RFC5958:
 
 informative:
+  RFC5911:
   RFC5912:
   RFC8692:
   RFC9688:
@@ -49,45 +54,64 @@ informative:
   RFC9881:
   RFC9925:
   RFC6402:
-
+  X680:
+    target: https://www.itu.int/rec/T-REC-X.680
+    title: >
+      Information technology - Abstract Syntax Notation One (ASN.1):
+      Specification of basic notation
+    date: 2021-02
+    author:
+    -  org: ITU-T
+    seriesinfo:
+      ITU-T Recommendation: X.680
+      ISO/IEC: 8824-1:2021
 ...
 
 --- abstract
 
-This document updates some ASN.1 modules which conform to the syntax of the 2002 version of ASN.1 but nonetheless cause errors when decoding artifacts with code compiled from these modules.
-There are no bits-on-the-wire changes to any of the formats; this is simply a change to the syntax.
+This document updates some ASN.1 modules which conform to the syntax of the 2002 version of ASN.1 but feature constraints that are no longer consistent with usage of the associated structures.
+There are no bits-on-the-wire changes to any of the formats; this is simply a change to the syntax to better align with current practices.
 
 
 --- middle
 
 # Introduction
 
-The PKIX-CommonTypes-2009 ASN.1 module of RFC 5912 defines the SIGNATURE-ALGORITHM ASN.1 information object class [RFC5912].
-The PKIX1Explicit-2009 ASN.1 module of RFC 5912 defines the SIGNED{ToBeSigned} ASN.1 type [RFC5912].
-SIGNATURE-ALGORITHM has an optional field, &Value, containing the type definition for the value structure of the signature. If this field is absent, comments in the PKIX1Explicit-2009 module state that no ASN.1 encoding is performed on the value.
-In RFC 5912, the SIGNED{ToBeSigned} type has a non-optional field, signature, with a CONTAINING clause referring to SIGNATURE-ALGORITHM.&Value.
-It is not valid ASN.1 for a CONTAINING clause to refer to a type which is absent.
-An ASN.1 syntax checker and compiler may accept this situation (since the type may also be present), but when an encoded ASN.1 information object with an absent &Value field is decoded, the decoder will return an error.
-This was not the intention of the PKIX1Explicit-2009 module, the intention was that the unencoded signature contents would be used.
+The data structures used in public key infrastructures (PKIs) were originally defined using the 1988 version of Abstract Syntax Notation One (ASN.1).
+[RFC5280] uses the 1988 syntax, despite ITU's adoption of later ASN.1 versions ([X680]) in their corresponding specifications.
+[RFC5911] and [RFC5912] were written to provide ASN.1 modules that conform to the 2002 version of the syntax for a variety of IETF RFCs.
+During the migration, various constraint mechanisms that were available in the 2002 syntax were used as an aid to developers.
 
-At time of writing, there are many signature algorithms defining instantiations of the SIGNATURE-ALGORITHM class which don't include the &Value field, namely RSASSA-PSS [RFC5912] [RFC8692], RSA PKCS v1.5 [RFC5912] [RFC9688], Ed25519 [RFC8410], HSS-LMS [RFC8708] [RFC9708], XMSS [RFC9802], SLH-DSA [RFC9814] [RFC9909], ML-DSA [RFC9881], sa-unsigned [RFC9925], and Composite ML-DSA {{?I-D.ietf-lamps-pq-composite-sigs}}.
-On the other hand, there are fewer signature algorithms instantiating the SIGNATURE-ALGORITHM class which include the &Value field, namely DSA [RFC5912], ECDSA [RFC5912] [RFC8692] [RFC9688], and sa-noSignature [RFC6402].
-The ASN.1 module defined in {{sec-5280}} will allow ASN.1 decoders to process signature algorithms from the former set, as well as future SIGNATURE-ALGORITHM instantiations without the &Value field defined.
-Signature algorithms with the &Value field defined can also use this module, but will not have compiler-assisted constraints applied.
+For example, the `PKIX-CommonTypes-2009` ASN.1 module of [RFC5912] defines the `SIGNATURE-ALGORITHM` ASN.1 information object class and the `SIGNED{ToBeSigned}` ASN.1 type.
+`SIGNATURE-ALGORITHM` has an optional field, `&Value`, containing the type definition for the value structure of the signature.
+If this field is absent, comments in the `PKIX1Explicit-2009` module state that no ASN.1 encoding is performed on the value.
+In [RFC5912], the `SIGNED{ToBeSigned}` type has a non-optional field, signature, with a `CONTAINING` clause referring to `SIGNATURE-ALGORITHM.&Value`.
 
-This document updates the following RFCs to define ASN.1 modules without ASN.1 CONSTRAINED clauses that refer to optional information object class fields:
+However, it is not valid ASN.1 for a `CONTAINING` clause to refer to a type which is absent.
+An ASN.1 syntax checker and compiler may accept this situation (since the type may also be present), but when an encoded ASN.1 information object with an absent `&Value` field is decoded, the decoder will return an error.
+This was not the intention of the `PKIX1Explicit-2009` module, the intention was that the unencoded signature contents would be used.
+While the presence of extensibility markers in the corresponding information object sets may have masked problems with the missing field in the object class instantiations in some products, this document aims to remove ambiguities.
+
+At time of writing, there are many signature algorithms defining instantiations of the `SIGNATURE-ALGORITHM` class which don't include the `&Value` field, namely RSASSA-PSS [RFC5912] [RFC8692], RSA PKCS v1.5 [RFC5912] [RFC9688], Ed25519 [RFC8410], HSS-LMS [RFC8708] [RFC9708], XMSS [RFC9802], SLH-DSA [RFC9814] [RFC9909], ML-DSA [RFC9881], sa-unsigned [RFC9925], and Composite ML-DSA {{?I-D.ietf-lamps-pq-composite-sigs}}.
+On the other hand, there are fewer signature algorithms instantiating the `SIGNATURE-ALGORITHM` class which include the `&Value` field, namely DSA [RFC5912], ECDSA [RFC5912] [RFC8692] [RFC9688], and sa-noSignature [RFC6402].
+The ASN.1 module defined in {{sec-5280}} will allow ASN.1 decoders to process signature algorithms from the former set, as well as future `SIGNATURE-ALGORITHM` instantiations without the `&Value` field defined.
+Signature algorithms with the `&Value` field defined can also use this module, but will not have compiler-assisted constraints applied.
+
+This document updates the following RFCs to define ASN.1 modules without ASN.1 `CONTAINING` clauses that refer to optional information object class fields:
 
 - RFC 5912, New ASN.1 Modules for the Public Key Infrastructure Using X.509 (PKIX) [RFC5912]. {{Section 14 of RFC5912}}, "ASN.1 Module for RFC 5280, Explicit and Implicit" [RFC5280] is updated. Only the explicit module is updated.
 - RFC 5958, Asymmetric Key Packages [RFC5958]. A commented-out alternative representation of OneAsymmetricKey is removed.
 
+All other definitions, including those with `CONTAINING` clauses that do not rely on optional information object class fields, remain unchanged.
 
 # ASN.1 Module for RFC 5280, Explicit {#sec-5280}
 
-SIGNED{ToBeSigned} is updated to a simpler version without ASN.1 constraints.
-The SIGNATURE-ALGORITHM.&Value field is optional, and it was not valid for the previous version of the SIGNED{ToBeSigned} signature CONTAINING constraint to reference a non-existent field.
-This is the only change compared to the PKIX1Explicit-2009 module in [RFC5912].
+`SIGNED{ToBeSigned}` is updated to a simpler version without ASN.1 constraints.
+This simpler version was presented as a commented out alternative in [RFC5912].
+The `SIGNATURE-ALGORITHM.&Value` field is optional, and it was not valid for the previous version of the `SIGNED{ToBeSigned}` signature `CONTAINING` constraint to reference a non-existent field.
+This is the only change compared to the `PKIX1Explicit-2009` module in [RFC5912].
 
-The new SIGNED{ToBeSigned} definition is:
+The new `SIGNED{ToBeSigned}` definition is:
 
 ~~~ asn.1
 SIGNED{ToBeSigned} ::= SEQUENCE {
@@ -503,9 +527,9 @@ END
 
 # ASN.1 Module for RFC 5958 {#sec-5958}
 
-The only change for this module from the AsymmetricKeyPackageModuleV1 module in [RFC5958] is to remove the commented-out alternative representation of OneAsymmetricKey which made full use of ASN.1 constraints.
-The PUBLIC-KEY.&PrivateKey field is optional, and it was not valid for the OneAsymmetricKey privateKey CONTAINING constraint to reference a non-existent field.
-For an ASN.1 compiler, there is no difference between the AsymmetricKeyPackageModuleV1 and AsymmetricKeyPackageModuleV1-2026 modules.
+The only change for this module from the `AsymmetricKeyPackageModuleV1` module in [RFC5958] is to remove the commented-out alternative representation of `OneAsymmetricKey` which made full use of ASN.1 constraints.
+The `PUBLIC-KEY.&PrivateKey` field is optional, and it was not valid for the `OneAsymmetricKey` privateKey `CONTAINING` constraint to reference a non-existent field.
+For an ASN.1 compiler, there is no difference between the `AsymmetricKeyPackageModuleV1` and `AsymmetricKeyPackageModuleV1-2026` modules.
 
 ~~~ asn.1
 <CODE BEGINS>
@@ -620,6 +644,11 @@ END
 <CODE ENDS>
 ~~~
 
+# Operational Considerations
+
+Code generated using the `SIGNED{ToBeSigned}` or `OneAsymmetricKey` definitions featuring a `CONTAINING` clause may differ from code generated using the definitions provided in this document.
+The lower level structures previously identified by the information object set used by the `CONTAINING` clause will not longer be automatically parsed and there will be no automatic affirmation that the field contains a valid and expected type.
+Library or application code will need to account for these changes to retain the desired functionality.
 
 # Security Considerations
 
@@ -646,5 +675,5 @@ IANA is requested to allocate a value from the "SMI Security for S/MIME Module I
 # Acknowledgments
 {:numbered="false"}
 
-Thanks goes to Pierce Leonberger who submitted an errata for SIGNED{ToBeSigned} in 2014 which didn't get the attention it deserved.
+Thanks goes to Pierce Leonberger who submitted an errata for `SIGNED{ToBeSigned}` in 2014 which didn't get the attention it deserved.
 Thanks to Josef Frühwirth who brought up the issue again more recently.
