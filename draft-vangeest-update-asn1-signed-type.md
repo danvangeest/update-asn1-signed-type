@@ -677,3 +677,5 @@ IANA is requested to allocate a value from the "SMI Security for S/MIME Module I
 
 Thanks goes to Pierce Leonberger who submitted an errata for `SIGNED{ToBeSigned}` in 2014 which didn't get the attention it deserved.
 Thanks to Josef Frühwirth who brought up the issue again more recently.
+Thanks to Michael StJohns for working with the authors to try to find an alternate solution which could keep the ASN.1 constraints.
+Ultimately there was no such solution, but the investigation was valuable.
