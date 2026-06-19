@@ -83,7 +83,7 @@ The data structures used in public key infrastructures (PKIs) were originally de
 During the migration, various constraint mechanisms that were available in the 2002 syntax were used as an aid to developers.
 
 For example, the `PKIX-CommonTypes-2009` ASN.1 module of [RFC5912] defines the `SIGNATURE-ALGORITHM` ASN.1 information object class and the `SIGNED{ToBeSigned}` ASN.1 type.
-`SIGNATURE-ALGORITHM` has an optional field, &Value, containing the type definition for the value structure of the signature.
+`SIGNATURE-ALGORITHM` has an optional field, `&Value`, containing the type definition for the value structure of the signature.
 If this field is absent, comments in the `PKIX1Explicit-2009` module state that no ASN.1 encoding is performed on the value.
 In [RFC5912], the `SIGNED{ToBeSigned}` type has a non-optional field, signature, with a `CONTAINING` clause referring to `SIGNATURE-ALGORITHM.&Value`.
 
