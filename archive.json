@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-18T04:17:36.152673+00:00",
+  "timestamp": "2026-06-21T04:41:18.518944+00:00",
   "repo": "danvangeest/update-asn1-signed-type",
   "labels": [
     {
@@ -50,5 +50,97 @@
     }
   ],
   "issues": [],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOSyZXnM7oFA9p",
+      "title": "minor edits and added operation considerations section",
+      "url": "https://github.com/danvangeest/update-asn1-signed-type/pull/1",
+      "state": "MERGED",
+      "author": "carl-wallace",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-06-18T18:31:15Z",
+      "updatedAt": "2026-06-19T09:08:26Z",
+      "baseRepository": "danvangeest/update-asn1-signed-type",
+      "baseRefName": "main",
+      "baseRefOid": "c743a3bd7959ee3a4b4637c1742d66774300f8a1",
+      "headRepository": "carl-wallace/update-asn1-signed-type",
+      "headRefName": "main",
+      "headRefOid": "e4f3b90a649b71f525572f092a4dc480046ef4f0",
+      "closedAt": "2026-06-19T09:08:26Z",
+      "mergedAt": "2026-06-19T09:08:25Z",
+      "mergedBy": "danvangeest",
+      "mergeCommit": {
+        "oid": "86a360ad701c06f461a79014f0ee5b6747c8797a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOSyZXnM8AAAABDhqEkA",
+          "commit": {
+            "abbreviatedOid": "93ed4f4"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-19T09:05:02Z",
+          "updatedAt": "2026-06-19T09:07:45Z",
+          "comments": [
+            {
+              "originalPosition": 71,
+              "body": "```suggestion\n`SIGNATURE-ALGORITHM` has an optional field, `&Value`, containing the type definition for the value structure of the signature.\n```",
+              "createdAt": "2026-06-19T09:05:02Z",
+              "updatedAt": "2026-06-19T09:07:45Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "id": "PR_kwDOSyZXnM7oT7oc",
+      "title": "Acknowledge MSJ",
+      "url": "https://github.com/danvangeest/update-asn1-signed-type/pull/2",
+      "state": "MERGED",
+      "author": "danvangeest",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-06-19T09:24:00Z",
+      "updatedAt": "2026-06-19T10:56:34Z",
+      "baseRepository": "danvangeest/update-asn1-signed-type",
+      "baseRefName": "main",
+      "baseRefOid": "86a360ad701c06f461a79014f0ee5b6747c8797a",
+      "headRepository": "danvangeest/update-asn1-signed-type",
+      "headRefName": "dvg/thank_msj",
+      "headRefOid": "16d99e22b767a805c4a8b789357962f140496d67",
+      "closedAt": "2026-06-19T10:56:33Z",
+      "mergedAt": "2026-06-19T10:56:33Z",
+      "mergedBy": "danvangeest",
+      "mergeCommit": {
+        "oid": "f04350a735e84bf8577dd78f3442709cd75cb3ed"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOSyZXnM8AAAABDh-Bzw",
+          "commit": {
+            "abbreviatedOid": "16d99e2"
+          },
+          "author": "carl-wallace",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-06-19T09:55:47Z",
+          "updatedAt": "2026-06-19T09:55:47Z",
+          "comments": []
+        }
+      ]
+    }
+  ]
 }
