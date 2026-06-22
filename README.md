@@ -4,10 +4,10 @@
 
 This is the working area for the individual Internet-Draft, "TODO - Your title".
 
-* [Editor's Copy](https://danvangeest.github.io/update-asn1-signed-type/#go.draft-vangeest-update-asn1-signed-type.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-vangeest-update-asn1-signed-type)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-vangeest-update-asn1-signed-type)
-* [Compare Editor's Copy to Individual Draft](https://danvangeest.github.io/update-asn1-signed-type/#go.draft-vangeest-update-asn1-signed-type.diff)
+* [Editor's Copy](https://danvangeest.github.io/update-asn1-signed-type/#go.draft-vangeest-lamps-update-asn1-signed-type.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-vangeest-lamps-update-asn1-signed-type)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-vangeest-lamps-update-asn1-signed-type)
+* [Compare Editor's Copy to Individual Draft](https://danvangeest.github.io/update-asn1-signed-type/#go.draft-vangeest-lamps-update-asn1-signed-type.diff)
 
 
 ## Contributing
