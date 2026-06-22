@@ -18,7 +18,7 @@
 /versioned/
 Gemfile.lock
 archive.json
-draft-vangeest-update-asn1-signed-type.xml
+draft-vangeest-lamps-update-asn1-signed-type.xml
 package-lock.json
 report.xml
 !requirements.txt

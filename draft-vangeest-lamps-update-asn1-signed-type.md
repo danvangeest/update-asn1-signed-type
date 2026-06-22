@@ -6,7 +6,7 @@ updates:
   - 5912
   - 5958
 
-docname: draft-vangeest-update-asn1-signed-type-latest
+docname: draft-vangeest-lamps-update-asn1-signed-type-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
@@ -23,7 +23,7 @@ venue:
 #  mail: spasm@ietf.org
 #  arch: https://mailarchive.ietf.org/arch/browse/spasm/
   github: "danvangeest/update-asn1-signed-type"
-  latest: "https://danvangeest.github.io/update-asn1-signed-type/draft-vangeest-update-asn1-signed-type.html"
+  latest: "https://danvangeest.github.io/update-asn1-signed-type/draft-vangeest-lamps-update-asn1-signed-type.html"
 
 author:
 - ins: D. Van Geest
