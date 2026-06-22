@@ -6,11 +6,11 @@ Network Working Group                                       D. Van Geest
 Internet-Draft                                       CryptoNext Security
 Updates: [5912, 5958] (if approved)                           C. Wallace
 Intended status: Informational                  Red Hound Software, Inc.
-Expires: 21 December 2026                                   19 June 2026
+Expires: 24 December 2026                                   22 June 2026
 
 
         Updated Parameterized SIGNED ASN.1 Type for X.509 (PKIX)
-             draft-vangeest-update-asn1-signed-type-latest
+          draft-vangeest-lamps-update-asn1-signed-type-latest
 
 Abstract
 
@@ -26,9 +26,9 @@ About This Document
 
    The latest revision of this draft can be found at
    https://danvangeest.github.io/update-asn1-signed-type/draft-vangeest-
-   update-asn1-signed-type.html.  Status information for this document
-   may be found at https://datatracker.ietf.org/doc/draft-vangeest-
-   update-asn1-signed-type/.
+   lamps-update-asn1-signed-type.html.  Status information for this
+   document may be found at https://datatracker.ietf.org/doc/draft-
+   vangeest-lamps-update-asn1-signed-type/.
 
    Source for this draft and an issue tracker can be found at
    https://github.com/danvangeest/update-asn1-signed-type.
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 December 2026.
+   This Internet-Draft will expire on 24 December 2026.
 
 Copyright Notice
 
