@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-21T04:41:18.518944+00:00",
+  "timestamp": "2026-06-23T03:51:57.388465+00:00",
   "repo": "danvangeest/update-asn1-signed-type",
   "labels": [
     {
@@ -49,7 +49,24 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 3,
+      "id": "I_kwDOSyZXnM8AAAABGSxp7w",
+      "title": "Acknowledge RFC 5912 and RFC 5958 authors",
+      "url": "https://github.com/danvangeest/update-asn1-signed-type/issues/3",
+      "state": "OPEN",
+      "author": "danvangeest",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-06-22T13:57:40Z",
+      "updatedAt": "2026-06-22T13:57:40Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
   "pulls": [
     {
       "number": 1,
