@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-23T03:51:57.388465+00:00",
+  "timestamp": "2026-07-19T02:57:53.463262+00:00",
   "repo": "danvangeest/update-asn1-signed-type",
   "labels": [
     {
@@ -155,6 +155,54 @@
           "body": "",
           "createdAt": "2026-06-19T09:55:47Z",
           "updatedAt": "2026-06-19T09:55:47Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "PR_kwDOSyZXnM7zE1m2",
+      "title": "Fix references",
+      "url": "https://github.com/danvangeest/update-asn1-signed-type/pull/4",
+      "state": "OPEN",
+      "author": "danvangeest",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "- Some references weren't showing up with square brackets (e.g. [RFC5912]). Switching to curly braces in the markdown fixed this.\r\n- Add references which are only referenced from within the ASN.1.",
+      "createdAt": "2026-07-17T16:58:04Z",
+      "updatedAt": "2026-07-17T18:33:48Z",
+      "baseRepository": "danvangeest/update-asn1-signed-type",
+      "baseRefName": "main",
+      "baseRefOid": "2ba173be9abd40d3b35cf400b4de15834170ce70",
+      "headRepository": "danvangeest/update-asn1-signed-type",
+      "headRefName": "dvg/fix_references",
+      "headRefOid": "4ef564ec31afde50e844f67718babf2a54c42180",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "danvangeest",
+          "authorAssociation": "OWNER",
+          "body": "I just copied exactly from RFC 5958.\r\n\r\nOn Fri, Jul 17, 2026, 7:09\u202fp.m. Carl Wallace ***@***.***>\r\nwrote:\r\n\r\n> ***@***.**** commented on this pull request.\r\n>\r\n> Why not RFC 7292 for PKCS 12 spec?\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/danvangeest/update-asn1-signed-type/pull/4?email_source=notifications&email_token=AH3JTAXMU7ZRWJIB6LDNYIL5FJMTFA5CNFSNUABKM5UWIORPF5TWS5BNNB2WEL2QOVWGYUTFOF2WK43UKJSXM2LFO4XTINZSGQ3DKNJYGUZ2M4TFMFZW63VGMF2XI2DPOKSWK5TFNZ2KYZTPN52GK4S7MNWGSY3L#pullrequestreview-4724655853>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AH3JTATUHVBEDR2JXADOHN35FJMTFAVCNFSNUABGKJSXA33TNF2G64TZHMYTENRQHAYDGOJZGY5US43TOVSTWNBZGEZTENZSGQYDJILWAI>\r\n> .\r\n> Triage notifications, keep track of coding agent tasks and review pull\r\n> requests on the go with GitHub Mobile for iOS\r\n> <https://github.com/notifications/mobile/ios/AH3JTAUS4NTMEANIBXBVYVL5FJMTFA5CNFSNUABKM5UWIORPF5TWS5BNNB2WEL2QOVWGYUTFOF2WK43UKJSXM2LFO4XTINZSGQ3DKNJYGUZ2M4TFMFZW63VGMF2XI2DPOKSWK5TFNZ2KUZTPN52GK4S7NFXXG>\r\n> and Android\r\n> <https://github.com/notifications/mobile/android/AH3JTAT6U6BDYDESN5MXZE35FJMTFA5CNFSNUABKM5UWIORPF5TWS5BNNB2WEL2QOVWGYUTFOF2WK43UKJSXM2LFO4XTINZSGQ3DKNJYGUZ2M4TFMFZW63VGMF2XI2DPOKSWK5TFNZ2K4ZTPN52GK4S7MFXGI4TPNFSA>.\r\n> Download it today!\r\n> You are receiving this because you authored the thread.Message ID:\r\n> ***@***.***>\r\n>\r\n",
+          "createdAt": "2026-07-17T18:33:48Z",
+          "updatedAt": "2026-07-17T18:33:48Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOSyZXnM8AAAABGZyG7Q",
+          "commit": {
+            "abbreviatedOid": "4ef564e"
+          },
+          "author": "carl-wallace",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Why not RFC 7292 for PKCS 12 spec? Else looks good.",
+          "createdAt": "2026-07-17T17:08:46Z",
+          "updatedAt": "2026-07-17T17:09:22Z",
           "comments": []
         }
       ]
