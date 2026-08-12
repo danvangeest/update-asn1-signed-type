@@ -679,3 +679,5 @@ Thanks goes to Pierce Leonberger who submitted an errata for `SIGNED{ToBeSigned}
 Thanks to Josef Frühwirth who brought up the issue again more recently.
 Thanks to Michael StJohns for working with the authors to try to find an alternate solution which could keep the ASN.1 constraints.
 Ultimately there was no such solution, but the investigation was valuable.
+
+Thanks to the authors of [RFC5912] and [RFC5958].  This document is just a small update on their work.
