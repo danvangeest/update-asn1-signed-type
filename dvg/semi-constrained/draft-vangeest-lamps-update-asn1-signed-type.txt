@@ -114,19 +114,19 @@ Table of Contents
 
    At time of writing, there are many signature algorithms defining
    instantiations of the SIGNATURE-ALGORITHM class which don't include
-   the &Value field, namely RSASSA-PSS RFC5912 [RFC8692], RSA PKCS v1.5
-   RFC5912 [RFC9688], Ed25519 [RFC8410], HSS-LMS RFC8708 [RFC9708], XMSS
-   [RFC9802], SLH-DSA RFC9814 [RFC9909], ML-DSA [RFC9881], sa-unsigned
-   [RFC9925], and Composite ML-DSA [I-D.ietf-lamps-pq-composite-sigs].
-   On the other hand, there are fewer signature algorithms instantiating
-   the SIGNATURE-ALGORITHM class which include the &Value field, namely
-   DSA [RFC5912], ECDSA RFC5912 [RFC8692] [RFC9688], and sa-noSignature
-   [RFC6402].  The ASN.1 module defined in Section 2 will allow ASN.1
-   decoders to process signature algorithms from the former set, as well
-   as future SIGNATURE-ALGORITHM instantiations without the &Value field
-   defined.  Signature algorithms with the &Value field defined can also
-   use this module, but will not have compiler-assisted constraints
-   applied.
+   the &Value field, namely RSASSA-PSS [RFC5912] [RFC8692], RSA PKCS
+   v1.5 [RFC5912] [RFC9688], Ed25519 [RFC8410], HSS-LMS [RFC8708]
+   [RFC9708], XMSS [RFC9802], SLH-DSA [RFC9814] [RFC9909], ML-DSA
+   [RFC9881], sa-unsigned [RFC9925], and Composite ML-DSA
+   [I-D.ietf-lamps-pq-composite-sigs].  On the other hand, there are
+   fewer signature algorithms instantiating the SIGNATURE-ALGORITHM
+   class which include the &Value field, namely DSA [RFC5912], ECDSA
+   [RFC5912] [RFC8692] [RFC9688], and sa-noSignature [RFC6402].  The
+   ASN.1 module defined in Section 2 will allow ASN.1 decoders to
+   process signature algorithms from the former set, as well as future
+   SIGNATURE-ALGORITHM instantiations without the &Value field defined.
+   Signature algorithms with the &Value field defined can also use this
+   module, but will not have compiler-assisted constraints applied.
 
    This document updates the following RFCs to define ASN.1 modules
    without ASN.1 CONTAINING clauses that refer to optional information
@@ -808,6 +808,14 @@ Table of Contents
               ietf-lamps-pq-composite-sigs-19, 21 April 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lamps-
               pq-composite-sigs-19>.
+
+   [P12]      RSA Laboratories, "PKCS #12 v1.0: Personal Information
+              Exchange Syntax", June 1999.
+
+   [RFC5208]  Kaliski, B., "Public-Key Cryptography Standards (PKCS) #8:
+              Private-Key Information Syntax Specification Version 1.2",
+              RFC 5208, DOI 10.17487/RFC5208, May 2008,
+              <https://www.rfc-editor.org/rfc/rfc5208>.
 
    [RFC5911]  Hoffman, P. and J. Schaad, "New ASN.1 Modules for
               Cryptographic Message Syntax (CMS) and S/MIME", RFC 5911,
