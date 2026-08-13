@@ -1225,8 +1225,7 @@ Signature algorithms with the <code>&amp;Value</code> field defined can also use
       <h2 id="name-asn1-module-for-rfc-5280-ex">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-asn1-module-for-rfc-5280-ex" class="section-name selfRef">ASN.1 Module for RFC 5280, Explicit</a>
       </h2>
-<p id="section-2-1"><code>SIGNED{ToBeSigned}</code> is updated to a simpler version without ASN.1 constraints.
-This simpler version was presented as a commented out alternative in <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span>.
+<p id="section-2-1"><code>SIGNED{ToBeSigned}</code> is updated to a version with an ASN.1 "User-defined constraint" (see section 9 of <span>[<a href="#X682" class="cite xref">X682</a>]</span>).
 The <code>SIGNATURE-ALGORITHM.&amp;Value</code> field is optional, and it was not valid for the previous version of the <code>SIGNED{ToBeSigned}</code> signature <code>CONTAINING</code> constraint to reference a non-existent field.
 This is the only change compared to the <code>PKIX1Explicit-2009</code> module in <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span>.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">The new <code>SIGNED{ToBeSigned}</code> definition is:<a href="#section-2-2" class="pilcrow">¶</a></p>
@@ -1236,7 +1235,26 @@ SIGNED{ToBeSigned} ::= SEQUENCE {
     toBeSigned          ToBeSigned,
     algorithmIdentifier AlgorithmIdentifier{SIGNATURE-ALGORITHM,
                         {SignatureAlgorithms}},
-    signature           BIT STRING
+    signature           BIT STRING (CONSTRAINED BY { ToBeSigned
+                            -- with the following processing:
+                            -- if
+                            --    SIGNATURE-ALGORITHM.&amp;Value {
+                            --      @algorithm.algorithm }
+                            --   is specified,
+                            -- then
+                            --   the content of the BIT STRING
+                            --   is the DER-encoded &amp;Value type
+                            --   representing the calculated
+                            --   signature over a DER-encoded value
+                            --   of a ToBeSigned (i.e., equivalent to
+                            --   a (CONTAINING &amp;Value ENCODED BY der)
+                            --   clause)
+                            -- Otherwise if &amp;Value is unspecified,
+                            --   the content is the array of octets
+                            --   representing the opaque (i.e., not
+                            --   ASN1) encoded signature with no
+                            --   leading type or length
+                        })
 }
 </pre><a href="#section-2-3" class="pilcrow">¶</a>
 </div>
@@ -1604,16 +1622,16 @@ ub-name INTEGER ::= 32768
 
 -- Parameterized Type SIGNED
 --
--- Three different versions of doing SIGNED:
+-- Four different versions of doing SIGNED:
 --  1.  Simple and close to the PKIX1Explicit93 (RFC 2459) version
 --
-SIGNED{ToBeSigned} ::= SEQUENCE {
-    toBeSigned          ToBeSigned,
-    algorithmIdentifier AlgorithmIdentifier{SIGNATURE-ALGORITHM,
-                        {SignatureAlgorithms}},
-    signature           BIT STRING
-}
-
+--  SIGNED{ToBeSigned} ::= SEQUENCE {
+--    toBeSigned  ToBeSigned,
+--    algorithm   AlgorithmIdentifier{SIGNATURE-ALGORITHM,
+--                    {SignatureAlgorithms}},
+--    signature   BIT STRING
+--  }
+--
 --  2.  From Authenticated Framework
 --
 --  SIGNED{ToBeSigned} ::= SEQUENCE {
@@ -1634,10 +1652,53 @@ SIGNED{ToBeSigned} ::= SEQUENCE {
 --      })
 --
 --
---  3.  Removed since PKIX1Explicit-2009:
---      A more complex version, but one that automatically ties
+--  3.  A more complex version, but one that automatically ties
 --      together both the signature algorithm and the
 --      signature value for automatic decoding.
+--      This is removed in this document.
+--
+--  SIGNED{ToBeSigned} ::= SEQUENCE {
+--     toBeSigned           ToBeSigned,
+--     algorithmIdentifier  SEQUENCE {
+--         algorithm        SIGNATURE-ALGORITHM.
+--                            &amp;id({SignatureAlgorithms}),
+--         parameters       SIGNATURE-ALGORITHM.
+--                            &amp;Params({SignatureAlgorithms}
+--                              {@algorithmIdentifier.algorithm})
+--                                  OPTIONAL
+--     },
+--     signature BIT STRING (CONTAINING SIGNATURE-ALGORITHM.&amp;Value(
+--                              {SignatureAlgorithms}
+--                              {@algorithmIdentifier.algorithm}))
+--  }
+--
+--  4.  Similar to option 1, with ASN.1 user-defined constraints and
+--      textual descriptions of the signature encodings.
+SIGNED{ToBeSigned} ::= SEQUENCE {
+    toBeSigned          ToBeSigned,
+    algorithmIdentifier AlgorithmIdentifier{SIGNATURE-ALGORITHM,
+                        {SignatureAlgorithms}},
+    signature           BIT STRING (CONSTRAINED BY { ToBeSigned
+                            -- with the following processing:
+                            -- if
+                            --    SIGNATURE-ALGORITHM.&amp;Value {
+                            --      @algorithm.algorithm }
+                            --   is specified,
+                            -- then
+                            --   the content of the BIT STRING
+                            --   is the DER-encoded &amp;Value type
+                            --   representing the calculated
+                            --   signature over a DER-encoded value
+                            --   of a ToBeSigned (i.e., equivalent to
+                            --   a (CONTAINING &amp;Value ENCODED BY der)
+                            --   clause)
+                            -- Otherwise if &amp;Value is unspecified,
+                            --   the content is the array of octets
+                            --   representing the opaque (i.e., not
+                            --   ASN1) encoded signature with no
+                            --   leading type or length
+                        })
+}
 
 END
 &lt;CODE ENDS&gt;
@@ -1906,8 +1967,12 @@ The ASN.1 modules keep the same bits-on-the-wire as the modules that they replac
 <span class="refAuthor">Benjamin, D.</span>, <span class="refTitle">"Unsigned X.509 Certificates"</span>, <span class="seriesInfo">RFC 9925</span>, <span class="seriesInfo">DOI 10.17487/RFC9925</span>, <time datetime="2026-02" class="refDate">February 2026</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9925">https://www.rfc-editor.org/rfc/rfc9925</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="X680">[X680]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">ITU-T</span>, <span class="refTitle">"Information technology - Abstract Syntax Notation One (ASN.1): Specification of basic notation"</span>, <span class="seriesInfo">ITU-T Recommendation X.680</span>, <span class="seriesInfo">ISO/IEC 8824-1:2021</span>, <time datetime="2021-02" class="refDate">February 2021</time>, <span>&lt;<a href="https://www.itu.int/rec/T-REC-X.680">https://www.itu.int/rec/T-REC-X.680</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="X682">[X682]</dt>
+      <dd>
+<span class="refAuthor">ITU-T</span>, <span class="refTitle">"Information technology - Abstract Syntax Notation One (ASN.1): Constraint specification"</span>, <span class="seriesInfo">ITU-T Recommendation X.682</span>, <span class="seriesInfo">ISO/IEC 8824-3:2021</span>, <time datetime="2021-02" class="refDate">February 2021</time>, <span>&lt;<a href="https://www.itu.int/rec/T-REC-X.682">https://www.itu.int/rec/T-REC-X.682</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
