@@ -6,7 +6,7 @@ Network Working Group                                       D. Van Geest
 Internet-Draft                                       CryptoNext Security
 Updates: [5912, 5958] (if approved)                           C. Wallace
 Intended status: Informational                  Red Hound Software, Inc.
-Expires: 13 February 2027                                 12 August 2026
+Expires: 14 February 2027                                 13 August 2026
 
 
         Updated Parameterized SIGNED ASN.1 Type for X.509 (PKIX)
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 February 2027.
+   This Internet-Draft will expire on 14 February 2027.
 
 Copyright Notice
 
@@ -146,8 +146,8 @@ Table of Contents
 
 2.  ASN.1 Module for RFC 5280, Explicit
 
-   SIGNED{ToBeSigned} is updated to a simpler version with unenforced
-   ASN.1 constraints (only descriptive prose).  The SIGNATURE-
+   SIGNED{ToBeSigned} is updated to a version with an ASN.1 "User-
+   defined constraint" (see section 9 of [X682]).  The SIGNATURE-
    ALGORITHM.&Value field is optional, and it was not valid for the
    previous version of the SIGNED{ToBeSigned} signature CONTAINING
    constraint to reference a non-existent field.  This is the only
@@ -594,8 +594,8 @@ Table of Contents
    --                              {@algorithmIdentifier.algorithm}))
    --  }
    --
-   --  4.  Similar to option 1, with unenforced constraints and textual
-   --      descriptions of the signature encodings.
+   --  4.  Similar to option 1, with ASN.1 user-defined constraints and
+   --      textual descriptions of the signature encodings.
    SIGNED{ToBeSigned} ::= SEQUENCE {
        toBeSigned          ToBeSigned,
        algorithmIdentifier AlgorithmIdentifier{SIGNATURE-ALGORITHM,
@@ -893,6 +893,11 @@ Table of Contents
               Recommendation X.680, ISO/IEC 8824-1:2021, February 2021,
               <https://www.itu.int/rec/T-REC-X.680>.
 
+   [X682]     ITU-T, "Information technology - Abstract Syntax Notation
+              One (ASN.1): Constraint specification", ITU-T
+              Recommendation X.682, ISO/IEC 8824-3:2021, February 2021,
+              <https://www.itu.int/rec/T-REC-X.682>.
+
 Acknowledgments
 
    Thanks goes to Pierce Leonberger who submitted an errata for
@@ -902,6 +907,9 @@ Acknowledgments
    authors to try to find an alternate solution which could keep the
    ASN.1 constraints.  Ultimately there was no such solution, but the
    investigation was valuable.
+
+   Thanks to the authors of [RFC5912] and [RFC5958].  This document is
+   just a small update on their work.
 
 Authors' Addresses
 
