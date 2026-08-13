@@ -66,6 +66,17 @@ informative:
     seriesinfo:
       ITU-T Recommendation: X.680
       ISO/IEC: 8824-1:2021
+  X682:
+    target: https://www.itu.int/rec/T-REC-X.682
+    title: >
+      Information technology - Abstract Syntax Notation One (ASN.1):
+      Constraint specification
+    date: 2021-02
+    author:
+    -  org: ITU-T
+    seriesinfo:
+      ITU-T Recommendation: X.682
+      ISO/IEC: 8824-3:2021
   P12:
     title: "PKCS #12 v1.0: Personal Information Exchange Syntax"
     date: June 1999
@@ -112,7 +123,7 @@ All other definitions, including those with `CONTAINING` clauses that do not rel
 
 # ASN.1 Module for RFC 5280, Explicit {#sec-5280}
 
-`SIGNED{ToBeSigned}` is updated to a simpler version with unenforced ASN.1 constraints (only descriptive prose).
+`SIGNED{ToBeSigned}` is updated to a version with an ASN.1 "User-defined constraint" (see section 9 of [X682]).
 The `SIGNATURE-ALGORITHM.&Value` field is optional, and it was not valid for the previous version of the `SIGNED{ToBeSigned}` signature `CONTAINING` constraint to reference a non-existent field.
 This is the only change compared to the `PKIX1Explicit-2009` module in {{RFC5912}}.
 
@@ -560,8 +571,8 @@ ub-name INTEGER ::= 32768
 --                              {@algorithmIdentifier.algorithm}))
 --  }
 --
---  4.  Similar to option 1, with unenforced constraints and textual
---      descriptions of the signature encodings.
+--  4.  Similar to option 1, with ASN.1 user-defined constraints and
+--      textual descriptions of the signature encodings.
 SIGNED{ToBeSigned} ::= SEQUENCE {
     toBeSigned          ToBeSigned,
     algorithmIdentifier AlgorithmIdentifier{SIGNATURE-ALGORITHM,
