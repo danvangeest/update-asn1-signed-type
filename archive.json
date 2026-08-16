@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-13T02:10:32.045862+00:00",
+  "timestamp": "2026-08-16T01:27:06.127930+00:00",
   "repo": "danvangeest/update-asn1-signed-type",
   "labels": [
     {
@@ -55,15 +55,15 @@
       "id": "I_kwDOSyZXnM8AAAABGSxp7w",
       "title": "Acknowledge RFC 5912 and RFC 5958 authors",
       "url": "https://github.com/danvangeest/update-asn1-signed-type/issues/3",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "danvangeest",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-06-22T13:57:40Z",
-      "updatedAt": "2026-06-22T13:57:40Z",
-      "closedAt": null,
+      "updatedAt": "2026-08-13T08:19:24Z",
+      "closedAt": "2026-08-13T08:19:24Z",
       "comments": []
     }
   ],
@@ -214,24 +214,26 @@
       "id": "PR_kwDOSyZXnM7-GYNz",
       "title": "Add acknowledgements of authors of RFC 5912 and RFC 5958",
       "url": "https://github.com/danvangeest/update-asn1-signed-type/pull/5",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "danvangeest",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-08-12T14:16:59Z",
-      "updatedAt": "2026-08-12T14:50:47Z",
+      "updatedAt": "2026-08-13T08:06:49Z",
       "baseRepository": "danvangeest/update-asn1-signed-type",
       "baseRefName": "main",
       "baseRefOid": "49c12658f2abf09027431912672d392934ccc91b",
       "headRepository": "danvangeest/update-asn1-signed-type",
       "headRefName": "dvg/thanks",
       "headRefOid": "a3293719b128c10dbf9577e4245aeed36e35b02b",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-08-13T08:06:45Z",
+      "mergedAt": "2026-08-13T08:06:45Z",
+      "mergedBy": "danvangeest",
+      "mergeCommit": {
+        "oid": "6531f5bd5058e1a41b7c197bc82f8f1c36158fb0"
+      },
       "comments": [
         {
           "author": "danvangeest",
@@ -262,24 +264,26 @@
       "id": "PR_kwDOSyZXnM7-GZBD",
       "title": "Update with MSJ's ASN.1 suggestion",
       "url": "https://github.com/danvangeest/update-asn1-signed-type/pull/6",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "danvangeest",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-08-12T14:17:24Z",
-      "updatedAt": "2026-08-12T19:27:01Z",
+      "updatedAt": "2026-08-13T08:20:09Z",
       "baseRepository": "danvangeest/update-asn1-signed-type",
       "baseRefName": "main",
-      "baseRefOid": "49c12658f2abf09027431912672d392934ccc91b",
+      "baseRefOid": "6531f5bd5058e1a41b7c197bc82f8f1c36158fb0",
       "headRepository": "danvangeest/update-asn1-signed-type",
       "headRefName": "dvg/semi-constrained",
-      "headRefOid": "f1150dcb00ec947c1b7c8ba791c7ea5381c79561",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "613cd4398be56ffe0c71857c22c106e30f6ceb85",
+      "closedAt": "2026-08-13T08:20:06Z",
+      "mergedAt": "2026-08-13T08:20:06Z",
+      "mergedBy": "danvangeest",
+      "mergeCommit": {
+        "oid": "434211acd02c5442f92fc356c19e749579cab396"
+      },
       "comments": [],
       "reviews": [
         {
@@ -347,6 +351,32 @@
           "createdAt": "2026-08-12T19:27:01Z",
           "updatedAt": "2026-08-12T19:27:01Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOSyZXnM8AAAABJYq1gg",
+          "commit": {
+            "abbreviatedOid": "f1150dc"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-13T08:10:38Z",
+          "updatedAt": "2026-08-13T08:11:49Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "I'll update this and add an informative reference to X.682.\n\nI'll make a similar change in the comments in the ASN.1 module.",
+              "createdAt": "2026-08-13T08:10:38Z",
+              "updatedAt": "2026-08-13T08:11:49Z"
+            },
+            {
+              "originalPosition": 15,
+              "body": "I've never seen this style in ASN.1 myself, and the rest of the module uses single-line comments, so I'd rather leave it as-is.",
+              "createdAt": "2026-08-13T08:11:39Z",
+              "updatedAt": "2026-08-13T08:11:49Z"
+            }
+          ]
         }
       ]
     }
