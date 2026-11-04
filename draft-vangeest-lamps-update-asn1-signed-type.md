@@ -77,6 +77,14 @@ informative:
     seriesinfo:
       ITU-T Recommendation: X.682
       ISO/IEC: 8824-3:2021
+  Err2653:
+    target: https://www.rfc-editor.org/errata/eid2653
+    title: RFC Errata, Erratum ID 2653
+    date: 2010-12
+    author:
+    -  org: RFC Editor
+    seriesinfo:
+      RFC: 5958
   P12:
     title: "PKCS #12 v1.0: Personal Information Exchange Syntax"
     date: June 1999
@@ -117,7 +125,7 @@ Signature algorithms with the `&Value` field defined can also use this module, b
 This document updates the following RFCs to define ASN.1 modules without ASN.1 `CONTAINING` clauses that refer to optional information object class fields:
 
 - RFC 5912, New ASN.1 Modules for the Public Key Infrastructure Using X.509 (PKIX) {{RFC5912}}. {{Section 14 of RFC5912}}, "ASN.1 Module for RFC 5280, Explicit and Implicit" {{RFC5280}} is updated. Only the explicit module is updated.
-- RFC 5958, Asymmetric Key Packages {{RFC5958}}. A commented-out alternative representation of OneAsymmetricKey is removed.
+- RFC 5958, Asymmetric Key Packages {{RFC5958}}. A commented-out alternative representation of OneAsymmetricKey is removed, and Erratum 2653 {{Err2653}} is applied.
 
 All other definitions, including those with `CONTAINING` clauses that do not rely on optional information object class fields, remain unchanged.
 
@@ -605,9 +613,10 @@ END
 
 # ASN.1 Module for RFC 5958 {#sec-5958}
 
-The only change for this module from the `AsymmetricKeyPackageModuleV1` module in {{RFC5958}} is to remove the commented-out alternative representation of `OneAsymmetricKey` which made full use of ASN.1 constraints.
+The changes for this module from the `AsymmetricKeyPackageModuleV1` module in {{RFC5958}} are to remove the commented-out alternative representation of `OneAsymmetricKey` which made full use of ASN.1 constraints, and to apply Erratum 2653 {{Err2653}}.
 The `PUBLIC-KEY.&PrivateKey` field is optional, and it was not valid for the `OneAsymmetricKey` privateKey `CONTAINING` constraint to reference a non-existent field.
-For an ASN.1 compiler, there is no difference between the `AsymmetricKeyPackageModuleV1` and `AsymmetricKeyPackageModuleV1-2026` modules.
+Erratum 2653 adds the `TYPE` keyword to the definition of `ct-asymmetric-key-package`, which the `CONTENT-TYPE` class in the `CryptographicMessageSyntax-2009` module requires since it was corrected by an erratum to {{RFC5911}}.
+For an ASN.1 compiler, there is no difference between the `AsymmetricKeyPackageModuleV1` module with Erratum 2653 applied and the `AsymmetricKeyPackageModuleV1-2026` module.
 
 ~~~ asn.1
 <CODE BEGINS>
@@ -652,7 +661,7 @@ ct-asymmetric-key-package,
 ... -- Expect additional content types --
 }
 ct-asymmetric-key-package CONTENT-TYPE ::=
-{ AsymmetricKeyPackage IDENTIFIED BY id-ct-KP-aKeyPackage }
+{ TYPE AsymmetricKeyPackage IDENTIFIED BY id-ct-KP-aKeyPackage }
 
 id-ct-KP-aKeyPackage OBJECT IDENTIFIER ::=
   { joint-iso-itu-t(2) country(16) us(840) organization(1)
